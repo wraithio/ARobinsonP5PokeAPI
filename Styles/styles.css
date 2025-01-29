@@ -1,0 +1,130 @@
+@font-face {
+    font-family: "Bubblegum";
+    src: url(/Assets/Fonts/BubblegumSans-Regular.ttf);
+}
+
+
+body{
+    font-family: "Bubblegum", Arial, Helvetica, sans-serif;
+    background-image: url("/Assets/pokeBG.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+input{
+    border: 2px solid red;
+    border-radius: .75rem;
+    background-color: transparent;
+    backdrop-filter: blur(2px);
+    padding: .25rem;
+    height: fit-content;
+    font-size: 22px;
+}
+
+button{
+    border: 2px solid black;
+    border-radius: .75rem; 
+    padding: .25rem .25rem;
+    background-color: transparent;
+    backdrop-filter: blur(2px);
+    height: fit-content;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+button:hover{
+    color: white;
+    background-color: black;
+}
+
+#favBtn{
+    width: 36px;
+    height: 36px;
+}
+
+#shinyBtn{
+    width: 70px;
+    height: 70px;
+}
+
+#shinyBtn:hover{
+    cursor: pointer;
+}
+
+#TitleText{
+    font-size: 72px;
+}
+
+h1{
+    font-size: 45px;
+    width: fit-content;
+    height: fit-content;
+}
+
+h2{
+    font-size: 28px;
+    width: fit-content;
+    height: fit-content;
+}
+
+h3{
+    font-size: 22px;
+    width: fit-content;
+    height: fit-content;
+}
+
+.card{
+    border: 5px solid black;
+    border-radius: .75rem;
+    padding: .75rem;
+}
+
+#warningText{
+    color: red;
+}
+
+#pokeImg{
+    min-width: 250px !important;
+}
+
+#remove{
+    margin-left: 1rem;
+}
+
+#remove:hover{
+    color: red;
+    cursor: pointer;
+    border: none;
+}
+
+#favItem:hover{
+    cursor: pointer;
+    color: gray;
+}
+
+.evolImgs{
+    width: 150px;
+}
+
+.scrollBlock{
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.evolBlock{
+    max-width: 400px;
+    overflow-x: auto;
+}
+
+ul {
+    list-style-type: disc;
+}    
+
+li{
+    font-size: 22px;
+}
+
+footer{
+    margin: 2rem 0rem;
+}
