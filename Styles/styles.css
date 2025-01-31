@@ -20,12 +20,13 @@ input{
     padding: .25rem;
     height: fit-content;
     font-size: 22px;
+    width: 200px;
 }
 
 button{
     border: 2px solid black;
     border-radius: .75rem; 
-    padding: .25rem .25rem;
+    padding: .25rem .75rem;
     background-color: transparent;
     backdrop-filter: blur(2px);
     height: fit-content;
@@ -46,6 +47,7 @@ button:hover{
 #shinyBtn{
     width: 70px;
     height: 70px;
+    margin-top: 1rem;
 }
 
 #shinyBtn:hover{
@@ -60,6 +62,12 @@ h1{
     font-size: 45px;
     width: fit-content;
     height: fit-content;
+}
+
+hr{
+    border: dashed black 4px;
+    height: 10px;
+    
 }
 
 h2{
@@ -85,11 +93,14 @@ h3{
 }
 
 #pokeImg{
-    min-width: 250px !important;
+    min-width: 250px;
+    transform: scale(1.2);
 }
 
 #remove{
     margin-left: 1rem;
+    display: flex;
+    align-items: center;
 }
 
 #remove:hover{
@@ -107,14 +118,22 @@ h3{
     width: 150px;
 }
 
+footer h2{
+    font-size: 24px;
+}
+
 .scrollBlock{
     max-height: 200px;
     overflow-y: auto;
 }
+.scrollBlockBIG{
+    max-height: 400px;
+    overflow-y: auto;
+}
 
 .evolBlock{
-    max-width: 400px;
-    overflow-x: auto;
+    max-height: 50px;
+    overflow-y: auto;
 }
 
 ul {
@@ -127,4 +146,155 @@ li{
 
 footer{
     margin: 2rem 0rem;
+}
+
+.card
+    {
+        overflow: hidden;
+    }
+
+@media screen and (max-width: 1283px) {
+    #pokeImg{
+        min-width: 200px;
+    }
+
+    .scrollBlock{
+        max-height: 150px;
+    }
+    .scrollBlockBIG{
+        max-height: 200px;
+    }
+
+    .container{
+        max-width: 65rem;
+    }
+}
+
+
+
+@media screen and (max-width: 1024px) {
+    .container{
+        max-width: 55rem;
+    }
+    .scrollBlockBIG{
+        max-height: 100px !important;
+    }
+
+    .scrollBlock
+    {
+        max-height: 150px;
+    }
+
+    #pokeImg{
+        min-width: fit-content;
+        transform: scale(1.6);
+    }
+
+    h1{
+        font-size: 36px;
+    }
+
+    h2{
+        font-size: 24px;
+    }
+
+    h3{
+        font-size: 18px;
+    }
+
+    li{
+        font-size: 18px;
+    }
+
+    #shinyBtn{
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+
+    h1{
+        font-size: 56px;
+    }
+
+    h2{
+        font-size: 36px;
+    }
+
+    h3{
+        font-size: 28px;
+    }
+
+    #TitleText{
+        font-size: 48px;
+    }
+
+    .evolBlock{
+        max-height: fit-content;
+    }
+
+    .scrollBlockBIG{
+        max-height: 100% !important;
+    }
+
+    #favBtn{
+        width: 50px;
+        height: 50px;
+    }
+
+    .mx-auto{
+        padding: 0rem 2rem;
+    }
+
+    .card{
+        border: none;
+        overflow: visible;
+        width: 100%;
+        padding: 0px;
+        padding-bottom: 1rem;
+    }
+
+    #pokeImg
+    {
+        transform: scale(1.4);
+    }
+
+    li{
+        font-size: 24px;
+    }
+
+    #warningText{
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    /* .mobileSearch{
+        flex-direction: column;
+        align-items: start;
+    }
+    
+    #pokeImg{
+        margin-bottom:6rem;
+        padding-right: 2rem;
+        transform: scale(3);
+    }
+
+    #shinyBtn{
+        width: 70px;
+        height: 70px;
+    } */
+    .mobileSearch{
+        display: block;
+    }
+
+    .subtitle{
+        font-size: 18px;
+    }
+
+    button{
+        width: 100px;
+        font-size: 18px;
+    }
 }
