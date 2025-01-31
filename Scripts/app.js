@@ -146,27 +146,18 @@ let findEvolChain = async (url) => {
     addToEvolChain(data.chain)
 }
 
-let addToEvolChain = async (chain) =>{
-    // console.log(chain)
-    
+let addToEvolChain = async (chain) =>{  
     let evolTree = [capitalize(chain.species.name)];
         for(let i = 0 ; i < chain.evolves_to.length ; i++)
     {
         evolTree.push(capitalize(chain.evolves_to[i].species.name));
-        // evolList.append(h3)
-        // console.log(h3.innerText)
         if(chain.evolves_to[i].evolves_to.length != 0)
         {
             evolTree.push(capitalize(chain.evolves_to[i].evolves_to[0].species.name));
-            // evolList.append(h3)
-            // console.log(h3.innerText)
-
         }
     }
     console.log(evolTree)
-
     evolList.className = evolTree.length > 3 ? "evolBlock" : "evolBlock flex justify-evenly";
-
     evolTree.map((name) => {
        let evolDiv = document.createElement("div");
     evolDiv.className = "flex flex-col justify-center"
@@ -281,8 +272,6 @@ let createFavs = () =>{
     });
 }
 
-createFavs()
-
 function formatForSearch(input) {
     let transformedString = input.replace(/ /g, '-');
     transformedString = transformedString.toLowerCase();
@@ -371,3 +360,4 @@ randomBtn.addEventListener("click", () => {
 
 
 generate("eevee")
+createFavs()
