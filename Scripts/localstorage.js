@@ -1,9 +1,6 @@
 function saveToLocalStorage(name){
     let nameArr = getFromLocalStorage();
 
-    console.log(nameArr)
-    console.log(name)
-
     if(!nameArr.includes(name))
     {
         nameArr.push(`${name}`);
