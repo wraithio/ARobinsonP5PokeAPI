@@ -68,7 +68,7 @@
               />
             </div>
           </div>
-          <div class="card row-[1] sm:col-[2] col-[1]">
+          <div class="card row-[1] sm:col-[2] col-span-2">
           
               <h1 id="pokemonName">Pikeachu</h1>
               <div class="flex">
@@ -90,14 +90,12 @@
               Evolution Tree
               <h1 id="evolNone"></h1>
             </h2>
-            <div class="flex justify-evenly evolBlock">
-              <div id="evolList"></div>
-            </div>
+              <div id="evolList" class=" w-full justify-between evolBlock"></div>
           </div>
         </div>
         <hr class="sm:hidden block">
         <div
-          class="grid text-clip  w-full sm:gap-4 grid-cols-[repeat(4,1fr)] grid-rows-[repeat(2,auto)]"
+          class="grid text-clip  w-full sm:gap-4 grid-cols-[repeat(4,auto)] grid-rows-[repeat(2,auto)]"
         >
           <div class="card col-span-4">
             <h2>Abilities</h2>
@@ -120,13 +118,13 @@
               </h3>
             </div>
           </div>
-          <div class="card  col-span-2">
+          <div class="card col-span-2">
             <h2>Moves</h2>
             <div class="scrollBlock">
               <ul id="moveBlock"></ul>
             </div>
           </div>
-          <div class="card  col-span-2">
+          <div class="card col-span-2">
             <h2>Favorites</h2>
               <div class="scrollBlock" id="favList"></div>
           </div>

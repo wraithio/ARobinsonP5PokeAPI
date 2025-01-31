@@ -24,6 +24,7 @@ let generate = async (userInput) => {
     }
     else
     {
+        evolList.innerText = ""
         fav = localStorage.Names.includes(capitalize(data.name));
         favBtn.src = fav ? "/Assets/star-solid-24.png" : "/Assets/star-regular-24.png";
 
@@ -100,7 +101,7 @@ let findPokeLoc = async (id) =>{
     }
     else
     {
-        pokemonLoc.innerText = `found at: ${capitalize(data[0].location_area.name)}`
+        pokemonLoc.innerText = `@ ${capitalize(data[0].location_area.name)}`
     }
     return data
 }
@@ -152,7 +153,7 @@ let buildEvolChain = async (url) =>{
 
 let addToEvolChain = async (chain) =>{
     console.log(chain)
-    let h2 = document.createElement("h2");
+    
     let evolTree = [capitalize(chain.species.name)];
     
     console.log(evolTree)
@@ -169,19 +170,35 @@ let addToEvolChain = async (chain) =>{
 
         }
     }
+    console.log(evolTree)
+    evolTree.map((name) => {
+       let evolDiv = document.createElement("div");
+    evolDiv.className = "flex flex-col justify-center"
+    let h2 = document.createElement("h2");
+    h2.innerText = name
+    h2.className = "evolName"
+    let evolIcon = document.createElement("img")
+        evolIcon.id = "favIcon"
+        findPokemonPic(name,evolIcon) 
+        evolDiv.appendChild(evolIcon)
+        evolDiv.appendChild(h2)
+        evolList.append(evolDiv)
+        h2.addEventListener("click", async()=>{
+            generate(name.toLowerCase())
+        })
+        evolIcon.addEventListener("click", async()=>{
+            generate(name.toLowerCase())
+        })
+    })
+    
 
-    h2.innerText = evolTree.join(" >> ");
-    evolList.append(h2)
+    // h2.innerText = evolTree.join(" >> ");
+ 
 
 
 }
 
-let findPokemonPic = async (name) => {
-    const promise = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
-    const data = await promise.json()
-    console.log(data.sprites.front_default)
-    return `${data.sprites.front_default}`
-}
+
 //evol
 //fetch pokemon-species to find evolves_from_species
 //if evolve_from_species == null, create an img and h2 with current pokemon and append to evolChain
@@ -200,27 +217,47 @@ let favorite = (pokemon) => {
     addToFavs(pokemon)
 }
 
+let findPokemonPic = async (name,pic) => {
+    const promise = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+    const data = await promise.json()
+    console.log(data.sprites.front_default)
+    pic.src = data.sprites.front_default
+    pic.alt = name
+}
+
 let addToFavs = (name) =>{
-    let h2 = document.createElement("h2");
-    h2.innerText = name;
-    h2.id = "favItem";
-    let removeBtn = document.createElement("button2");
-    removeBtn.id = "remove";
-    removeBtn.innerText = "X";
-
-    removeBtn.addEventListener("click", function () {
-        removeFromLocalStorage(name);
-        h2.remove();
-        removeBtn.remove();
-        if(name == pokemonName.innerText)
-        {
-            favBtn.src = "/Assets/star-regular-24.png"
-            fav = false
-        }
-      });
-
-      h2.appendChild(removeBtn);
-      favList.appendChild(h2);
+    let favBlock = document.createElement("div")
+        favBlock.className = "flex items-center favDiv"
+        let pokeIcon = document.createElement("img")
+        pokeIcon.id = "favIcon"
+        findPokemonPic(name,pokeIcon)
+        let h2 = document.createElement("h2");
+        h2.innerText = name;
+        h2.id = "favItem";
+        h2.addEventListener("click", async()=>{
+            generate(name.toLowerCase())
+        })
+        pokeIcon.addEventListener("click", async()=>{
+            generate(name.toLowerCase())
+        })
+        let removeBtn = document.createElement("h2");
+        removeBtn.id = "remove";
+        removeBtn.innerText = "X";
+        removeBtn.addEventListener("click", async () => {
+            removeFromLocalStorage(name);
+            h2.remove();
+            removeBtn.remove()
+            pokeIcon.remove()
+            if(name == pokemonName.innerText)
+            {
+                favBtn.src = "/Assets/star-regular-24.png"
+                fav = false
+            }
+          });
+          favBlock.appendChild(pokeIcon)
+          favBlock.appendChild(h2)
+          favBlock.append(removeBtn);
+          favList.appendChild(favBlock);
 }
 
 let createFavs = () =>{
@@ -228,28 +265,34 @@ let createFavs = () =>{
 
     pokeNames.map((name) => {
         let favBlock = document.createElement("div")
-        favBlock.className = "flex"
+        favBlock.className = "flex items-center favDiv"
         let pokeIcon = document.createElement("img")
-        pokeIcon.src = findPokemonPic(name.toLowerCase())
+        pokeIcon.id = "favIcon"
+        findPokemonPic(name,pokeIcon)
         let h2 = document.createElement("h2");
         h2.innerText = name;
         h2.id = "favItem";
         h2.addEventListener("click", async()=>{
             generate(name.toLowerCase())
         })
-        let removeBtn = document.createElement("button2");
+        pokeIcon.addEventListener("click", async()=>{
+            generate(name.toLowerCase())
+        })
+        let removeBtn = document.createElement("h2");
         removeBtn.id = "remove";
         removeBtn.innerText = "X";
         removeBtn.addEventListener("click", async () => {
             removeFromLocalStorage(name);
             h2.remove();
+            removeBtn.remove()
+            pokeIcon.remove()
             if(name == pokemonName.innerText)
             {
                 favBtn.src = "/Assets/star-regular-24.png"
                 fav = false
             }
           });
-        //   favBlock.appendChild(pokeIcon)
+          favBlock.appendChild(pokeIcon)
           favBlock.appendChild(h2)
           favBlock.append(removeBtn);
           favList.appendChild(favBlock);
