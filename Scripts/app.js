@@ -7,15 +7,15 @@ userInput.value = ""
 let fav = false
 warningText.style.visibility = "hidden"
 let generate = async (userInput) => {
-    const promise = await fetch(`https://pokeapi.co/api/v2/pokemon/${userInput}`)
-    if(!promise.ok)
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${userInput}`)
+    if(!response.ok)
     {
        warningText.style.visibility = "visible"
         warningText.innerText = "No data found."
         return null
     }
     
-    const data = await promise.json()    
+    const data = await response.json()    
     warningText.style.visibility = "hidden"
     if(data.id > 649)
     {
@@ -47,23 +47,15 @@ let generate = async (userInput) => {
         pokemonNum.innerText = ` ${data.id}`
         findPokeLoc(data.id)
         findEvol(data.id)
-        pokeImg.src = data.sprites.front_default
+        pokeImg.src = data.sprites.other.home.front_default
         pokeImg.alt = data.name
-        // ability1.innerText = capitalize(data.abilities[1].ability.name)
-        // findDescription(data.abilities[1].ability.url, 0)
-        // ability2.innerText = ""
-        // abilityDes2.innerText = ""
+        prevBtn.style.visibility = (data.id == 1) ? "hidden" : "visible";
+        nextBtn.style.visibility = (data.id == 649) ? "hidden" : "visible";        
 
-        // if(data.abilities.length != 1)
-        // {
-        // ability2.innerText = capitalize(data.abilities[1].ability.name)
-        //     findDescription(data.abilities[1].ability.url,1)
-        // }
         for(let i = 0; i < data.abilities.length; i++)
         {
             findDescription(data.abilities[i].ability.url,i)
         }
-
         let moveList = data.moves
         let moveArr = []
         moveBlock.innerText = ""
@@ -81,9 +73,9 @@ let generate = async (userInput) => {
 }
 
 let findDescription = async (url,num) =>{
-    const promise = await fetch(url)
-    const data = await promise.json()
-    console.log(data)
+    const response = await fetch(url)
+    const data = await response.json()
+    // console.log(data)
     if(data.effect_entries != null)
     {
         abilityTitles[num].innerText = capitalize(data.name)
@@ -92,8 +84,8 @@ let findDescription = async (url,num) =>{
 }
 
 let findPokeLoc = async (id) =>{
-    const promise = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/encounters`)
-    const data = await promise.json()
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/encounters`)
+    const data = await response.json()
     // console.log(data)
     if(data.length == 0)
     {
@@ -106,9 +98,17 @@ let findPokeLoc = async (id) =>{
     return data
 }
 
+//evol psuedocode
+//fetch pokemon-species to find evolves_from_species
+//iterate through species until evolve_from_species == null
+//this will find the first evolution of whatever pokemon is selected
+//then create a div, img and h3 with current pokemon and append to evolTree
+//then, fetch pokemon-species from evolves_to.name
+//create a div, img and h3 with next pokemon then next until evolves_to = null
+
 let findEvol = async (id) => {
-    const promise = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}/`)
-    const data = await promise.json()
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}/`)
+    const data = await response.json()
     // console.log(data)
     if(data.evolves_from_species != null)
     {
@@ -118,12 +118,12 @@ let findEvol = async (id) => {
     {
         findRootPokemon(data.evolution_chain.url)
     }
-    // findRootPokemon(data.evolution_chain.url)
 }
 
+
 let findRootPokemon = async (url) => {
-    const promise = await fetch(url)
-    const data = await promise.json()
+    const response = await fetch(url)
+    const data = await response.json()
     // console.log(data)
     if(data.chain.evolves_to.length == 0)
     {
@@ -138,78 +138,60 @@ let findRootPokemon = async (url) => {
 }
 
 let findEvolChain = async (url) => {
-    const promise = await fetch(url)
-    const data = await promise.json()
+    const response = await fetch(url)
+    let data = await response.json()
     // console.log(data)
-    buildEvolChain(data.evolution_chain.url)
-}
-
-let buildEvolChain = async (url) =>{
-    const promise = await fetch(url)
-    const data = await promise.json()
-    console.log(data)
+    const responseEvol = await fetch(data.evolution_chain.url)
+    data = await responseEvol.json()
     addToEvolChain(data.chain)
 }
 
 let addToEvolChain = async (chain) =>{
-    console.log(chain)
+    // console.log(chain)
     
     let evolTree = [capitalize(chain.species.name)];
-    
-    console.log(evolTree)
-    for(let i = 0 ; i < chain.evolves_to.length ; i++)
+        for(let i = 0 ; i < chain.evolves_to.length ; i++)
     {
         evolTree.push(capitalize(chain.evolves_to[i].species.name));
-        // evolList.append(h2)
-        // console.log(h2.innerText)
+        // evolList.append(h3)
+        // console.log(h3.innerText)
         if(chain.evolves_to[i].evolves_to.length != 0)
         {
             evolTree.push(capitalize(chain.evolves_to[i].evolves_to[0].species.name));
-            // evolList.append(h2)
-            // console.log(h2.innerText)
+            // evolList.append(h3)
+            // console.log(h3.innerText)
 
         }
     }
     console.log(evolTree)
+
+    evolList.className = evolTree.length > 3 ? "evolBlock" : "evolBlock flex justify-evenly";
+
     evolTree.map((name) => {
        let evolDiv = document.createElement("div");
     evolDiv.className = "flex flex-col justify-center"
-    let h2 = document.createElement("h2");
-    h2.innerText = name
-    h2.className = "evolName"
+    let h3 = document.createElement("h3");
+    h3.innerText = name
+    h3.className = "evolName"
     let evolIcon = document.createElement("img")
         evolIcon.id = "favIcon"
         findPokemonPic(name,evolIcon) 
         evolDiv.appendChild(evolIcon)
-        evolDiv.appendChild(h2)
+        evolDiv.appendChild(h3)
         evolList.append(evolDiv)
-        h2.addEventListener("click", async()=>{
-            generate(name.toLowerCase())
+        h3.addEventListener("click", async()=>{
+            generate(formatForSearch(name))
         })
         evolIcon.addEventListener("click", async()=>{
-            generate(name.toLowerCase())
+            generate(formatForSearch(name))
         })
     })
-    
-
-    // h2.innerText = evolTree.join(" >> ");
- 
-
-
 }
 
-
-//evol
-//fetch pokemon-species to find evolves_from_species
-//if evolve_from_species == null, create an img and h2 with current pokemon and append to evolChain
-//else, fetch pokemon-species from the evolves_from_species.name
-//if evolve_from_species == null, create an img and h2 with current pokemon and append to evolChain
-
-
 const isShiny = async (toggle) => {
-    const promise = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName.innerText.toLowerCase()}`);
-    const data = await promise.json();
-    pokeImg.src = data.sprites[toggle ? 'front_default' : 'front_shiny'];
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${formatForSearch(pokemonName.innerText)}`);
+    const data = await response.json();
+    pokeImg.src = data.sprites.other.home[toggle ? 'front_default' : 'front_shiny'];
 };
 
 let favorite = (pokemon) => {
@@ -218,10 +200,9 @@ let favorite = (pokemon) => {
 }
 
 let findPokemonPic = async (name,pic) => {
-    const promise = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
-    const data = await promise.json()
-    console.log(data.sprites.front_default)
-    pic.src = data.sprites.front_default
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${formatForSearch(name)}`)
+    const data = await response.json()
+    pic.src = data.sprites.other.home.front_default
     pic.alt = name
 }
 
@@ -231,21 +212,21 @@ let addToFavs = (name) =>{
         let pokeIcon = document.createElement("img")
         pokeIcon.id = "favIcon"
         findPokemonPic(name,pokeIcon)
-        let h2 = document.createElement("h2");
-        h2.innerText = name;
-        h2.id = "favItem";
-        h2.addEventListener("click", async()=>{
-            generate(name.toLowerCase())
+        let h3 = document.createElement("h3");
+        h3.innerText = name;
+        h3.id = "favItem";
+        h3.addEventListener("click", async()=>{
+            generate(formatForSearch(name))
         })
         pokeIcon.addEventListener("click", async()=>{
-            generate(name.toLowerCase())
+            generate(formatForSearch(name))
         })
-        let removeBtn = document.createElement("h2");
+        let removeBtn = document.createElement("h3");
         removeBtn.id = "remove";
         removeBtn.innerText = "X";
         removeBtn.addEventListener("click", async () => {
             removeFromLocalStorage(name);
-            h2.remove();
+            h3.remove();
             removeBtn.remove()
             pokeIcon.remove()
             if(name == pokemonName.innerText)
@@ -255,7 +236,7 @@ let addToFavs = (name) =>{
             }
           });
           favBlock.appendChild(pokeIcon)
-          favBlock.appendChild(h2)
+          favBlock.appendChild(h3)
           favBlock.append(removeBtn);
           favList.appendChild(favBlock);
 }
@@ -269,21 +250,21 @@ let createFavs = () =>{
         let pokeIcon = document.createElement("img")
         pokeIcon.id = "favIcon"
         findPokemonPic(name,pokeIcon)
-        let h2 = document.createElement("h2");
-        h2.innerText = name;
-        h2.id = "favItem";
-        h2.addEventListener("click", async()=>{
-            generate(name.toLowerCase())
+        let h3 = document.createElement("h3");
+        h3.innerText = name;
+        h3.id = "favItem";
+        h3.addEventListener("click", async()=>{
+            generate(formatForSearch(name))
         })
         pokeIcon.addEventListener("click", async()=>{
-            generate(name.toLowerCase())
+            generate(formatForSearch(name))
         })
-        let removeBtn = document.createElement("h2");
+        let removeBtn = document.createElement("h3");
         removeBtn.id = "remove";
         removeBtn.innerText = "X";
         removeBtn.addEventListener("click", async () => {
             removeFromLocalStorage(name);
-            h2.remove();
+            h3.remove();
             removeBtn.remove()
             pokeIcon.remove()
             if(name == pokemonName.innerText)
@@ -291,15 +272,22 @@ let createFavs = () =>{
                 favBtn.src = "/Assets/star-regular-24.png"
                 fav = false
             }
-          });
+          });   
+
           favBlock.appendChild(pokeIcon)
-          favBlock.appendChild(h2)
+          favBlock.appendChild(h3)
           favBlock.append(removeBtn);
           favList.appendChild(favBlock);
     });
 }
 
 createFavs()
+
+function formatForSearch(input) {
+    let transformedString = input.replace(/ /g, '-');
+    transformedString = transformedString.toLowerCase();
+    return transformedString;
+}
 
 let capitalize = (string) =>{
     return string
@@ -311,9 +299,12 @@ let capitalize = (string) =>{
 
 }
 
-// favItem.addEventListener("click",() =>{
-//     generate(fav)
-// })
+nextBtn.addEventListener("click", () =>{
+    generate(parseInt(pokemonNum.innerText) + 1)
+})
+prevBtn.addEventListener("click", () =>{
+    generate(parseInt(pokemonNum.innerText) - 1)
+});
 
 generateBtn.addEventListener("click",() =>{
     if(userInput.value.trim() === "")
@@ -324,7 +315,25 @@ generateBtn.addEventListener("click",() =>{
     else
     {
         warningText.style.visibility = "hidden"
-        generate(userInput.value.toLowerCase())
+        generate(formatForSearch(userInput.value.trim()))
+        userInput.value = ""
+    }
+});
+
+userInput.addEventListener("keydown", async (event) =>{
+    if(event.key === "Enter")
+    {
+    if(userInput.value.trim() === "")
+    {
+        warningText.style.visibility = "visible"
+        warningText.innerText = "Enter a valid name/number."
+    }
+    else
+    {
+        warningText.style.visibility = "hidden"
+        generate(formatForSearch(userInput.value.trim()))
+        userInput.value = ""
+    }
     }
 });
 
@@ -361,4 +370,4 @@ randomBtn.addEventListener("click", () => {
 });
 
 
-generate("pikachu")
+generate("eevee")

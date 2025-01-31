@@ -45,7 +45,7 @@
           </div>
         </div>
       </div>
-      <h2 id="warningText">!!!</h2>
+      <h2 id="warningText"></h2>
     </div>
 
     <div class="container mx-auto">
@@ -53,13 +53,14 @@
         <div
           class="grid w-full sm:gap-4 sm:grid-cols-[repeat(2,auto)] grid-cols-[repeat(3,1fr)] grid-rows-[repeat(3,auto)]"
         >
-          <div class="card sm:col-span-1 col-[3] sm:row-span-2 sm:h-fit mobileBlock">
-            <img
-              id="pokeImg"
-              class="w-full"
-              src="#"
-              alt="pokemon image"
-            />
+          <div
+            class="card sm:col-span-1 col-[3] sm:row-span-2 sm:h-fit mobileBlock"
+          >
+            <div class="flex items-center">
+              <button id="prevBtn"><</button>
+              <img id="pokeImg" src="#" alt="pokemon image" />
+              <button id="nextBtn">></button>
+            </div>
             <div class="flex justify-end">
               <img
                 id="shinyBtn"
@@ -69,53 +70,39 @@
             </div>
           </div>
           <div class="card row-[1] sm:col-[2] col-span-2">
-          
-              <h1 id="pokemonName">Pikeachu</h1>
-              <div class="flex">
-                <h3>no.</h3>
-                <h3 id="pokemonNum">Pikeachu</h3>
-              </div>
-              <div class="flex">
-                
-                <h3 id="pokemonType">Pikeachu</h3>
-              </div>
-              <div class="flex">
-              
-                <h3 id="pokemonLoc">Pikeachu</h3>
-              </div>
-          
+            <h1 id="pokemonName">Loading...</h1>
+            <div class="flex">
+              <h3>no.</h3>
+              <h3 id="pokemonNum"></h3>
+            </div>
+            <div class="flex">
+              <h3 id="pokemonType"></h3>
+            </div>
+            <div class="flex">
+              <h3 id="pokemonLoc"></h3>
+            </div>
           </div>
           <div class="card col-span-3">
             <h2>
               Evolution Tree
               <h1 id="evolNone"></h1>
             </h2>
-              <div id="evolList" class=" w-full justify-between evolBlock"></div>
+            <div id="evolList" class="evolBlock flex justify-center"></div>
           </div>
         </div>
-        <hr class="sm:hidden block">
+        <hr class="sm:hidden block" />
         <div
-          class="grid text-clip  w-full sm:gap-4 grid-cols-[repeat(4,auto)] grid-rows-[repeat(2,auto)]"
+          class="grid text-clip w-full sm:gap-4 grid-cols-[repeat(4,auto)] grid-rows-[repeat(2,auto)]"
         >
           <div class="card col-span-4">
             <h2>Abilities</h2>
             <div id="abilityBlock" class="scrollBlockBIG">
-              <h2 id="ability1">Static</h2>
-              <h3 id="abilityDes1">
-                Has a 30% chance of paralyzing attacking Pokémon on contact.
-              </h3>
-              <h2 id="ability2">Lightning Rod</h2>
-              <h3 id="abilityDes2">
-                Redirects single-target electric moves to this Pokémon where
-                possible. Absorbs Electric moves, raising Special Attack one
-                stage.
-              </h3>
-              <h2 id="ability3">Lightning Rod</h2>
-              <h3 id="abilityDes3">
-                Redirects single-target electric moves to this Pokémon where
-                possible. Absorbs Electric moves, raising Special Attack one
-                stage.
-              </h3>
+              <h2 id="ability1"></h2>
+              <h3 id="abilityDes1"></h3>
+              <h2 id="ability2"></h2>
+              <h3 id="abilityDes2"></h3>
+              <h2 id="ability3"></h2>
+              <h3 id="abilityDes3"></h3>
             </div>
           </div>
           <div class="card col-span-2">
@@ -126,11 +113,11 @@
           </div>
           <div class="card col-span-2">
             <h2>Favorites</h2>
-              <div class="scrollBlock" id="favList"></div>
+            <div class="scrollBlock" id="favList"></div>
           </div>
         </div>
       </div>
-      <hr class="sm:hidden block">
+      <hr class="sm:hidden block" />
 
       <footer class="flex">
         <div class="w-1/2">

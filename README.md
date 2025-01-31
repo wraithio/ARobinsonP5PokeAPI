@@ -25,6 +25,8 @@ Requirements:
 
 ---
 
+figma [here](https://www.figma.com/design/blIQM5s6cOGD2Tn6jwKZIf/Pokemon?node-id=0-1&t=2OWCFrDGjYdS9kdJ-1)
+
 github [here](https://github.com/wraithio/ARobinsonP5PokeAPI)
 
 vercel [here](https://a-robinson-p5-poke-api.vercel.app/)

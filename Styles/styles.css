@@ -93,8 +93,7 @@ h3{
 }
 
 #pokeImg{
-    min-width: 250px;
-    transform: scale(1.2);
+    min-width: 200px;
 }
 
 #remove{
@@ -103,13 +102,12 @@ h3{
     align-items: center;
 }
 
-#favIcon{
-    transform: scale(1.3);
-    overflow: hidden;
-}
-
 #favIcon:hover{
     cursor: pointer;
+}
+
+#favIcon{
+    width: 100px;
 }
 
 .favDiv{
@@ -147,11 +145,12 @@ footer h2{
 }
 
 .scrollBlock{
-    max-height: 200px;
+    max-height: 250px;
     overflow: scroll;
     scrollbar-color: black gray;
     scrollbar-width: auto;
 }
+
 .scrollBlockBIG{
     max-height: 400px;
     overflow: scroll;
@@ -182,16 +181,24 @@ footer{
     margin: 2rem 0rem;
 }
 
+@media screen and (max-width: 1920px)
+{
+    .evolBlock{
+        max-width: 700px;
+    }
+}
+
 @media screen and (max-width: 1283px) {
     #pokeImg{
         min-width: 200px;
     }
 
-    .scrollBlock{
-        max-height: 150px;
-    }
     .scrollBlockBIG{
         max-height: 200px;
+    }
+
+    .evolBlock{
+        max-width: 450px;
     }
 
     .container{
@@ -206,29 +213,19 @@ footer{
         max-width: 55rem;
     }
     .scrollBlockBIG{
-        max-height: 100px !important;
+        max-height: 175px;
+    }
+
+    .scrollBlock{
+        max-height: 150px;
     }
 
     .evolBlock{
         max-width: 400px;
     }
 
-    .scrollBlock
-    {
-        max-height: 150px;
-    }
-
     #favItem{
         display: none;
-    }
-
-    #favIcon{
-        transform: scale(1.3);
-    }
-
-    #pokeImg{
-        min-width: fit-content;
-        transform: scale(1.6);
     }
 
     .card{
@@ -257,7 +254,46 @@ footer{
     }
 }
 
+@media screen and (max-width: 890px) {
+    .container{
+        padding: 0rem 2rem;
+    }
+
+    #favIcon{
+        width: 60px;
+    }
+
+    #pokeImg{
+        min-width: 100px;
+    }
+}
+
+@media screen and (max-width: 728px) {
+    .evolBlock{
+       max-width: 300px; 
+    }
+}
+
 @media screen and (max-width: 640px) {
+
+    hr{
+        margin: 2rem 0rem;
+    }
+
+    #pokeImg{
+        min-width: 200px;
+    }
+
+    #nextBtn{
+        padding: 0px;
+        border: none;
+        width: fit-content;
+    }
+    #prevBtn{
+        padding: 0px;
+        border: none;
+        width: fit-content;
+    }
 
     #favItem{
         display: block;
@@ -273,10 +309,6 @@ footer{
 
     h3{
         font-size: 28px;
-    }
-
-    .scrollBlock{
-        max-height: 300px;
     }
 
     #TitleText{
@@ -306,12 +338,6 @@ footer{
         overflow: visible;
         width: 100%;
         padding: 0px;
-        padding-bottom: 1rem;
-    }
-
-    #pokeImg
-    {
-        transform: scale(1.4);
     }
 
     li{
@@ -320,6 +346,10 @@ footer{
 
     #warningText{
         font-size: 16px;
+    }
+
+    #shinyBtn{
+        margin: 0;
     }
 }
 
@@ -339,6 +369,23 @@ footer{
         width: 70px;
         height: 70px;
     } */
+
+    .subtitle{
+        display: none;
+    }
+
+    h1{
+      font-size: 36px;  
+    }
+
+    #pokeImg{
+        min-width: 100px;
+    }
+
+    #favItem{
+        display: none;
+    }
+
     .mobileSearch{
         display: block;
     }
@@ -350,5 +397,8 @@ footer{
     button{
         width: 100px;
         font-size: 18px;
+    }
+    .container{
+        padding: 0rem 1rem;
     }
 }
