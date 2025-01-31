@@ -31,5 +31,5 @@ github [here](https://github.com/wraithio/ARobinsonP5PokeAPI)
 
 vercel [here](https://a-robinson-p5-poke-api.vercel.app/)
 
-### Peer Review by:
-**Comments:**: 
+### Peer Review by:Alan Batres
+**Comments:**: This project is really good Everything works properly and is responsive I like how you changed the document Icon with an img, I didn't even know you could do that so imma have to do that now. I also like the images you have they are good quality. Great Job:) 
