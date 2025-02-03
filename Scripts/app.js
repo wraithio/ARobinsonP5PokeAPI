@@ -1,5 +1,5 @@
 import {saveToLocalStorage, getFromLocalStorage, removeFromLocalStorage} from "./localstorage.js"
-
+getFromLocalStorage()
 let shiny = false
 let descriptions = [abilityDes1,abilityDes2,abilityDes3]
 let abilityTitles = [ability1,ability2,ability3]
@@ -25,8 +25,13 @@ let generate = async (userInput) => {
     else
     {
         evolList.innerText = ""
-        fav = localStorage.Names.includes(capitalize(data.name));
-        favBtn.src = fav ? "/Assets/star-solid-24.png" : "/Assets/star-regular-24.png";
+        if(localStorage.Names.includes(capitalize(data.name)))
+        {
+            favBtn.src ="/Assets/star-solid-24.png"
+        }
+        else(
+            favBtn.src ="/Assets/star-regular-24.png"
+        )
 
         for(let i = 0; i < descriptions.length; i++)
         {
