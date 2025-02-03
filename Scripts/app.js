@@ -1,5 +1,5 @@
 import {saveToLocalStorage, getFromLocalStorage, removeFromLocalStorage} from "./localstorage.js"
-
+createFavs()
 let shiny = false
 let descriptions = [abilityDes1,abilityDes2,abilityDes3]
 let abilityTitles = [ability1,ability2,ability3]
@@ -360,4 +360,3 @@ randomBtn.addEventListener("click", () => {
 
 
 generate("eevee")
-createFavs()

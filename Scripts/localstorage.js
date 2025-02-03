@@ -12,9 +12,6 @@ function saveToLocalStorage(name){
 function getFromLocalStorage(){
     let localStorageData = localStorage.getItem('Names');
 
-    if(localStorageData == null){
-        return [];
-    }
             return JSON.parse(localStorageData);
     
 
