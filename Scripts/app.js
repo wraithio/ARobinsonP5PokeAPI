@@ -1,5 +1,5 @@
 import {saveToLocalStorage, getFromLocalStorage, removeFromLocalStorage} from "./localstorage.js"
-getFromLocalStorage()
+
 let shiny = false
 let descriptions = [abilityDes1,abilityDes2,abilityDes3]
 let abilityTitles = [ability1,ability2,ability3]
@@ -25,6 +25,7 @@ let generate = async (userInput) => {
     else
     {
         evolList.innerText = ""
+        getFromLocalStorage()
         if(localStorage.Names.includes(capitalize(data.name)))
         {
             favBtn.src ="/Assets/star-solid-24.png"
