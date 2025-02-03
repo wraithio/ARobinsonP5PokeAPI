@@ -25,14 +25,14 @@ let generate = async (userInput) => {
     else
     {
         evolList.innerText = ""
-        getFromLocalStorage()
-        if(localStorage.Names.includes(capitalize(data.name)))
-        {
-            favBtn.src ="/Assets/star-solid-24.png"
-        }
-        else(
-            favBtn.src ="/Assets/star-regular-24.png"
-        )
+        // getFromLocalStorage()
+        // if(localStorage.Names.includes(capitalize(data.name)))
+        // {
+        //     favBtn.src ="/Assets/star-solid-24.png"
+        // }
+        // else(
+        //     favBtn.src ="/Assets/star-regular-24.png"
+        // )
 
         for(let i = 0; i < descriptions.length; i++)
         {
